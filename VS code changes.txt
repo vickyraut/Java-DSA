@@ -1,0 +1,9 @@
+Save changes on out of focused tab
+
+duplicate lines - ctrl + d
+
+delete duplicate lines - ctrl + alt + d
+
+intend line = ctrl + shift + enter
+
+

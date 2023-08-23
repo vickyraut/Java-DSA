@@ -1,0 +1,146 @@
+1. Create new file input.txt
+2. Create new file output.txt
+
+3. Use following code to read input and output from that files.
+
+// For getting input from input.txt file
+    freopen("input.txt", "r", stdin);
+ 
+// Printing the Output to output.txt file
+    freopen("output.txt", "w", stdout);
+
+4. This code code have to removed this lines from program
+   when we have to submit out answer in online judge
+   otherwise it will give runtime error, cause input and
+   outfiles are present on your Local computer but not on Online server.
+
+5. To get ride of rhis problem we can use ONLINE_JUDGE macro in our program.
+
+#ifndef ONLINE_JUDGE
+    // For getting input from input.txt file
+    freopen("input.txt", "r", stdin);
+ 
+    // Printing the Output to output.txt file
+    freopen("output.txt", "w", stdout);
+ 
+#endif
+
+so using this we will specify that - 
+If ONLINE_JUDGE is not defined than this code is running Local computer and use this lines.
+and if macro is present simply ignore this lines and jump on mo statement.
+
+
+
+-------------- Task Configuration code for various Languages ------------------------
+
+1] C++ = 
+
+#ifndef ONLINE_JUDGE
+ 
+    // For getting input from input.txt file
+    freopen("input.txt", "r", stdin);
+ 
+    // Printing the Output to output.txt file
+    freopen("output.txt", "w", stdout);
+ 
+#endif
+
+
+2] Java =
+
+a) using ONLINE_JUDGE
+
+/******* NOTE *******/
+
+we can also do the same using ONLINE_JUDGE in java,
+But as of now it does not work in codechef but works in codeforces. 
+
+\******* NOTE *******\
+
+
+// Java code for I/O
+import java.io.*;   ------------------ Don't forget to import io package.
+
+// this does not works in codechef but works in codeforces
+
+class GFG {
+	public static void main(String[] args)
+		throws IOException
+	{
+		if (System.getProperty("ONLINE_JUDGE") == null) {
+			// Redirecting the I/O to external files
+
+			// as ONLINE_JUDGE constant is not defined which
+			// means
+
+			// the code is not running on an online judge
+
+			PrintStream ps
+				= new PrintStream(new File("output.txt"));
+			InputStream is
+				= new FileInputStream("input.txt");
+
+			System.setIn(is);
+			System.setOut(ps);
+		}
+	}
+}
+
+
+b) using BufferReader class & PrintWriter class
+
+In Java, we can use BufferedReader class for the fast Input and PrintWriter class for
+formatted representation to the output along with FileReader and FileWriter class. 
+ 
+
+-FileReader(String filename): This constructor creates a new FileReader, 
+and instructs the parser to read file from that directory. The file must exist in that specified location.
+
+-FileWriter(String fileName): This constructor creates a FileWriter object, 
+to the specified location.
+
+// Java program For handling Input/Output
+import java.io.*;
+class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		// BufferedReader Class for Fast buffer Input
+		BufferedReader br = new BufferedReader(
+							new FileReader("input.txt"));
+
+		// PrintWriter class prints formatted representations
+		// of objects to a text-output stream.
+		PrintWriter pw=new PrintWriter(new
+				BufferedWriter(new FileWriter("output.txt")));
+
+		// Your code goes Here
+
+		pw.flush();
+	}
+}
+
+
+
+
+3] Python
+
+In python we first import the module sys(system), after that We will use open() 
+function which returns the file object, that are commonly used with 
+two arguments: open(filename, mode). 
+ 
+
+The first argument is a string containing the filename.
+The second argument is another string (mode) containing a few characters 
+describing the way in which the file will be used.
+
+
+
+# Below is Python code for input/output
+
+import sys
+# For getting input from input.txt file
+sys.stdin = open('input.txt', 'r')
+
+# Printing the Output to output.txt file
+sys.stdout = open('output.txt', 'w')
