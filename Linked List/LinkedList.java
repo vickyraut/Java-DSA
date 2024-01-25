@@ -204,7 +204,7 @@ public class LinkedList {
         }
 
         return slow;
-    }
+    } 
 
     public boolean isPalindrome(){
         // if linked list is empty or contains only 1 node
