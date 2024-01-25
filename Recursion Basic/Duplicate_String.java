@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 public class Duplicate_String {
     public static void removeDuplicates_String(String str, boolean[] map, int idx, StringBuilder newStr){
         //base
@@ -21,3 +22,28 @@ public class Duplicate_String {
         removeDuplicates_String("appnnacollege", new boolean[26], 0, new StringBuilder());
     }
 }
+=======
+public class Duplicate_String {
+    public static void removeDuplicates_String(String str, boolean[] map, int idx, StringBuilder newStr){
+        //base
+        if (str.length() == idx){
+            System.out.println(newStr);
+            return;
+        }
+
+        // work
+        char currChar = str.charAt(idx);
+        if (map[currChar - 'a']){
+            removeDuplicates_String(str, map, idx+1, newStr);
+        }else {
+            map[currChar - 'a'] = true;
+            removeDuplicates_String(str, map, idx+1, newStr.append(currChar));
+        }
+    }
+
+
+    public static void main(String[] args) {
+        removeDuplicates_String("appnnacollege", new boolean[26], 0, new StringBuilder());
+    }
+}
+>>>>>>> 2dc2d2a15ea84cd77e87a7988cdb28723bf345e5
