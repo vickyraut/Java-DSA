@@ -142,16 +142,52 @@ public class LinkedList2 {
         return merge(leftHalf, rightHalf);
     }
 
+    public void zig_zig(Node head){
+        // 1. Find middle
+        Node mid = getMid(head);
+
+        // 2. Reverse 2nd Half
+        Node curr = mid.next;
+        mid.next = null;
+
+        Node prev = null;
+        Node next;
+
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        // 3. Alternate Merging
+        Node LHead = head;
+        Node RHead = prev;
+        Node nextL, nextR;
+
+        while (LHead!=null && RHead != null){
+            nextL = LHead.next;
+            LHead.next = RHead;
+            nextR = RHead.next;
+            RHead.next = nextL;
+
+            LHead = nextL;
+            RHead = nextR;
+        }
+
+    }
+
+
     public static void main(String[] args) {
-        head = new Node(5);
-        head.next = new Node(4);
+        head = new Node(1);
+        head.next = new Node(2);
         head.next.next = new Node(3);
-        head.next.next.next = new Node(2);
-        head.next.next.next.next = new Node(1);
+        head.next.next.next = new Node(4);
+        head.next.next.next.next = new Node(5);
 
         LinkedList2 ll = new LinkedList2();
         ll.printList();
-        head = ll.mergeSort(head);
+        ll.zig_zig(head);
         ll.printList();
     }
 }
