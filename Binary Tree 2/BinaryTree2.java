@@ -134,20 +134,21 @@ public class BinaryTree2 {
                     }
 
                     if (curr.node.left != null) {
-                        queue.add(new Info2(curr.node, curr.hd - 1));
+                        queue.add(new Info2(curr.node.left, curr.hd - 1));
                         min = Math.min(min, curr.hd - 1);
                     }
 
                     if (curr.node.right != null) {
-                        queue.add(new Info2(curr.node, curr.hd + 1));
+                        queue.add(new Info2(curr.node.right, curr.hd + 1));
                         max = Math.max(max, curr.hd + 1);
                     }
                 }
             }
 
             for (int i = min; i <= max; i++) {
-                System.out.println(map.get(i).data + " ");
+                System.out.print(map.get(i).data + " ");
             }
+            System.out.println();
         }
     }
 
