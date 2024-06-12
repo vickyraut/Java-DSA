@@ -63,35 +63,35 @@ public class BinaryTree3 {
             // Finding Lowest common Ancestor
             int i = 0;
 
-            for (; i< path1.size() && i<path2.size(); i++){
-                if (path1.get(i)  != path2.get(i)){
+            for (; i < path1.size() && i < path2.size(); i++) {
+                if (path1.get(i) != path2.get(i)) {
                     break;
                 }
             }
 
             // lac -> last equal Node
-            Node lca = path1.get(i-1);
+            Node lca = path1.get(i - 1);
             return lca;
         }
 
         // Optimised with constant space Complexity
-        public static Node lowestCommonAncestor2(Node root, int n1, int n2){
-            if (root == null){
+        public static Node lowestCommonAncestor2(Node root, int n1, int n2) {
+            if (root == null) {
                 return null;
             }
 
-            if (root.data == n1 || root.data == n2){
+            if (root.data == n1 || root.data == n2) {
                 return root;
             }
 
             Node leftLca = lowestCommonAncestor2(root.left, n1, n2);
             Node rightLca = lowestCommonAncestor2(root.right, n1, n2);
 
-            if (leftLca == null){
+            if (leftLca == null) {
                 return rightLca;
             }
 
-            if (rightLca == null){
+            if (rightLca == null) {
                 return leftLca;
             }
 
@@ -99,53 +99,68 @@ public class BinaryTree3 {
         }
 
         private static int lcaDist(Node root, int n) {
-            if (root == null){
+            if (root == null) {
                 return -1;
             }
 
-            if (root.data == n){
+            if (root.data == n) {
                 return 0;
             }
 
             int leftDist = lcaDist(root.left, n);
             int rightDist = lcaDist(root.right, n);
 
-            if (leftDist == -1 && rightDist == -1){
+            if (leftDist == -1 && rightDist == -1) {
                 return -1;
-            } else if (leftDist == -1){
-                return rightDist+1;
-            }else {
-                return leftDist+1;
+            } else if (leftDist == -1) {
+                return rightDist + 1;
+            } else {
+                return leftDist + 1;
             }
         }
 
-        public static int minDist(Node root, int n1, int n2){
+        public static int minDist(Node root, int n1, int n2) {
             Node lca = lowestCommonAncestor2(root, n1, n2);
             int dist1 = lcaDist(lca, n1);
             int dist2 = lcaDist(lca, n1);
 
-            return dist1+dist2;
+            return dist1 + dist2;
         }
 
-        public static int kthAncestor(Node root, Node target, int k, int level){
-            if (root == null){
+        public static int kthAncestor(Node root, Node target, int k, int level) {
+            if (root == null) {
                 return -1;
             }
 
-            if (level == k){
+            if (level == k) {
                 return root.data;
             }
 
-            if (root.data == target.data){
+            if (root.data == target.data) {
                 return 0;
             }
 
-            kthAncestor(root.left, target, k, level+1);
-            kthAncestor(root.right, target, k, level+1);
+            kthAncestor(root.left, target, k, level + 1);
+            kthAncestor(root.right, target, k, level + 1);
 
             return -1;
+        }
 
-       }
+        public static int transformSumTree(Node root) {
+            if (root == null) {
+                return 0;
+            }
+
+            int leftChild = transformSumTree(root.left);
+            int rightChild = transformSumTree(root.right);
+
+            int newLeft = root.left == null ? 0 : root.left.data;
+            int newRight = root.right == null ? 0 : root.right.data;
+
+            int data = root.data;
+            root.data = newLeft + leftChild + newRight + rightChild;
+            return data;
+        }
     }
 
     public static void main(String[] args) {
@@ -163,7 +178,7 @@ public class BinaryTree3 {
 
         System.out.println(BinaryTree.lowestCommonAncestor2(root, 4, 5).data);
 
-        System.out.println(BinaryTree.minDist(root, 4,6));
+        System.out.println(BinaryTree.minDist(root, 4, 6));
 
         System.out.println(BinaryTree.kthAncestor(root, new Node(7), 2, 0));
     }
