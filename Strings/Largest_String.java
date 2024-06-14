@@ -8,13 +8,11 @@ public class Largest_String {
             }
 
         }
-
         System.out.println(largest);
     }
 
     public static void main(String[] args) {
         String[] array = {"Apple", "Mango", "Banana"};
-
         largest(array);
     }
 }
