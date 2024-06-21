@@ -52,7 +52,7 @@ public class Graph_Traversals {
         graph[6].add(new Edge(6, 5, 1));
     }
 
-    public static void bfs(ArrayList<Edge>[] graph) {
+    public static void bfs(ArrayList<Edge>[] graph) { // TC = O(V+E)
         Queue<Integer> queue = new LinkedList<>();
         boolean visited[] = new boolean[graph.length];
         // Add source 0
@@ -62,7 +62,7 @@ public class Graph_Traversals {
             int curr = queue.remove();
 
             if (!visited[curr]) { // visiting curr
-                System.out.println(curr + " ");
+                System.out.print(curr + " ");
                 visited[curr] = true;
                 for (int i = 0; i < graph[curr].size(); i++) {
                     Edge e = graph[curr].get(i);
@@ -72,12 +72,49 @@ public class Graph_Traversals {
         }
     }
 
-    public static void dfs()
+    public static void dfs(ArrayList<Edge>[] graph, int curr, boolean visited[]) { // TC = O(V+E)
+        // Visit curr
+        System.out.print(curr + " ");
+        visited[curr] = true;
+
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+            if (!visited[e.destination]) {
+                dfs(graph, e.destination, visited);
+            }
+        }
+    }
+
+    public static boolean isPath(ArrayList<Edge>[] graph, int src, int dest, boolean[] visited) { // TC = O(V+E)
+        if (src == dest) {
+            return true;
+        }
+        // Add curr to visited
+        visited[src] = true;
+
+        for (int i = 0; i < graph[src].size(); i++) {
+            Edge edge = graph[src].get(i);
+            int neighbour = edge.destination;
+            // if neighbor knows the route to destination
+            if (!visited[neighbour] && isPath(graph, neighbour, dest, visited)) {
+                return true;
+            }
+        }
+
+        // Otherwise
+        return false;
+    }
 
     public static void main(String[] args) {
         int v = 7;
         ArrayList<Edge>[] graph = new ArrayList[v];
+        System.out.println("I am BFS");
         createGraph(graph);
         bfs(graph);
+        System.out.println();
+        System.out.println("I am DFS");
+        dfs(graph, 0, new boolean[7]);
+        System.out.println();
+        System.out.println(isPath(graph, 0, 5, new boolean[7]));
     }
 }
